@@ -1,0 +1,149 @@
+~~~~~~~~~~~~~~~~~~
+~ deb-downloader ~
+~~~~~~~~~~~~~~~~~~
+
+
+ INTRODUCCIÓ
+~~~~~~~~~~~~~
+
+	Aquesta és una utilitat anomenada deb-downloader, una eina implemen-
+tada per a una distribució de GNU/Linux especifica anomenada Debian (o 
+distribucions basades en ella). deb-downloader va ser escrit quan la 
+meva connexió "d'alta velocitat" va ser tallada per un canvi de domici-
+li. Això va fer-me pensar en quina seria la millor manera per actualit-
+zar la meva Sid (Debian té tres versions (estable, testeix i inestable,
+també anomenada Sid, una llegenda urbana diu que prové de "System In 
+Development")).
+
+	Havia sentit parlar sobre una eina anomenada apt-zip, pero no tinc 
+una distribucio GNU/Linux a la feina, per tant em vaig decidir a escriu-
+re aquesta eina. deb-downloader està escrit en Perl, per tant, l'únic 
+requeriment per usar-lo es disposar d'un sistema operatiu amb un inter-
+pret de perl com poden ser sistemes *nix, Macintosh (OS 7-9 i X), VMS, 
+Windows, etc. (mira http://www.cpan.org/ports/index.html per més infor-
+mació).
+
+	Aquesta utilitat esta dividida tres scripts. El primer i el tercer 
+s'executen en una distribució Debian i la segona en una màquina amb 
+qualsevol sistema operatiu que tingui disponible un interpret de perl.
+
+	Espero que sigui útil per tothom que la faci servir.
+
+
+ REQUERIMENTS
+~~~~~~~~~~~~~~
+
+	Només hi ha dos requeriment per usar deb-downloader.
+	
+		- Debian GNU/Linux (o basada en Debian) amb interpret de perl 
+		  per deb-downloader-build i deb-downloader-install.
+		- Interpret de perl amb els mòduls Net::FTP i Net::HTTP per 
+		  deb-downloader-download.
+
+
+ INSTAL·LACIÓ
+~~~~~~~~~~~~~~
+
+	- tar xvfz deb-downloader-nn.nn.nn.tar.gz target_dir.
+	- tar xvfj deb-downloader-nn.nn.nn.tar.bz target_dir.
+	.
+	.
+	.
+
+	
+ ÚS
+~~~~
+
+
+	Aquests són els tres scripts :
+
+	- deb-downloader-build : Aquest script s'úsa per recol·lectar les 
+	  uris de tots els paquets .deb que posteriorment seran descarre-
+	  gats. Aquesta opció s'executa en una distribució Debian.
+
+		deb-downloader-build --file=filename install package1...packagen|dist-upgrade [-d|--debug] [--skip-update]
+		
+			-d|--debug : Serveix per veure missatges extra de l'execu-
+			  ció. Important per reportar bugs.
+			--help : Mostra l'ajuda del deb-downloader.
+			--version : Mostra la versió del deb-downloader.						
+			--file : Nom de l'arxiu on gravarem les uris dels .deb.
+			--skip-update : No executar apt-get update (amb aquesta op-
+			  ció activada, no és necessari executar l'script com a usu-
+			  ari root.
+			install paquet1...paquetn : Seleccionar els paquets a des-
+			  carregar (apt-get install elquesigui).
+			dist-upgrade : Actualitza la distro (apt-get dist-upgrade).
+			
+	- deb-downloader-download : Aquest script és usat per descarregar 
+	  els paquets .deb necessaris. Pot ser executat a qualsevol
+	  ordinador amb qualsevol sistema operatiu amb un interpret de perl.
+				 
+		deb-downloader-download --file=filename1...filenamen [-d|--debug] [--dd-root=directory] [--skip-downloaded]
+		
+			-d|--debug : Serveix per veure missatges extra de l'execu-
+			  ció. Important per reportar bugs.
+			--help : Mostra l'ajuda del deb-downloader.
+			--version : Mostra la versió del deb-downloader.			
+			--file : Noms dels arxius d'on llegirem les uris.		
+			--dd-root : Especifica el directori de destí per descarre-
+			  gar els paquets .deb (directori dd-root per defecte).
+			--skip-downloaded : Si aquesta opció està activada, els pa-
+			  quets ja descarregats no es descarregaran una altra vega-
+			  da (si has parat l'execució abans de que s'acabi).
+				 
+	- deb-downloader-install : Aquest script (l'últim pas) és usat per 
+	  instal·lar els paquets dins de /var/cache/apt/archives i, si es 
+	  vol, executar apt-get dist-upgrade, apt-get install el que sigui 
+	  o només copiar els arxius, com es vulgui.
+		
+		deb-downloader-install --file=filename [-d|--debug] [install
+		package1...packagen|dist-upgrade][--mirror-format] [--dd-root=directori] [--output-directory=directori]
+		
+			-d|--debug : Serveix per veure missatges extra de l'execu-
+			  ció. Important per reportar bugs.
+			--help : Mostra l'ajuda del deb-downloader.
+			--version : Mostra la versió del deb-downloader.						
+			--file : Nom dels arxius d'on llegirem les uris.		
+			--dd-root : Especifica el directori d'on agafarem els pa-
+			  quets .deb (directori dd-root per defecte).
+			--output-directory : Especifica el directori on es copiaran
+			  els paquets .deb packages (per defecte, el directori 
+			  /var/cache/apt/archives per defecte).						
+			--mirror-format : Aquesta opció ens gravarà els paquets amb
+			  el format de directoris que té el servidor (incompatible 
+			  amb la funcio dd-root no informada).		
+			--skip-action : Aquesta opció salta la acció (dist-upgrade 
+			  o install elquesigui).						  
+			install paquet1...paquetn : Seleccionar els paquets a des-
+			  carregar (apt-get install elquesigui).
+			dist-upgrade : Actualitza la distro (apt-get dist-upgrade).
+			copy-files : Només copia els arxius al directori especifi-
+			  cat.
+
+		
+ ERRORS, PEGATS, REQUERIMENTS & SUGERENCIES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	Si us plau, reporteu tots els errors, pegats, requeriments i suge-
+rencies a debdownloader@gmail.com, serà tot benvingut (si es molt inte-
+ressant intentaré incloure-ho a la següent "release". Si voleu comentar
+algun tema també podeu apuntar-vos a les llistes de correu que trobareu
+a la pàgina web 
+
+	http://deb-downloader.berlios.de/lists.php?lang=ca.
+
+
+ LLICENCIA
+~~~~~~~~~~~
+
+	Aquest programa es software lliure; pots redistribuïr-lo i/o modifi-
+car-lo segons les condicions de la llicència pública general GNU (GPL) 
+tal i com està publicat per la Free Software Foundation; tant per la 
+versió 2 o (segons la teva opció) qualsevol versió posterior.
+
+	Aquest programari és distribuït esperant que et sigui útil, però 
+SENSE CAP GARANTIA; sense la garantia implícita de MERCANTIBILITAT o 
+CAPACITAT PER A UN PROPOSIT PARTICULAR. Llegeix la llicència pública ge-
+neral GNU (GPL) per més informació.
+

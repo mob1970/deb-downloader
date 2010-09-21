@@ -1,0 +1,88 @@
+
+ deb-downloader CHANGELOG
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ + version 0.3.1.
+ 
+ 		- deb-downloader splitted in three scripts.
+		- Added install option.
+		- Added copy-files option.
+		- Added --skip-downloaded-files option.
+		- Improved ftp and http download error control.
+		- Allowed to download getting the urls from more than one file.
+		- Installing from uris provided by apt-get, not by --file 
+		  parameter.
+		- Little changes.
+		
+ + version 0.1.15.
+ 
+ 		- Change relative apt-get path for absolute path (security).
+		- mirror-format install option written.
+		- Rewritten option validations.
+		- Automatic dist-upgrade available.
+ 
+
+ + version 0.1.14.
+ 
+ 		- Little changes.
+ 
+ + version 0.1.13.
+
+		- Fixed error in regex getting server part in each uri.
+		- Fixed error grouping uris by server.
+
+ + version 0.1.12.
+ 
+ 		- Install option added.
+		- --execute-dist-upgrade option added. 
+ + version 0.1.11.
+ 
+ 		- Little changes.
+		
+ + version 0.1.10.
+
+		- Execution controls added.
+
+ + version 0.1.9.
+ 
+ 		- Little changes.
+ 
+ + version 0.1.8.
+
+		- Install option added.
+
+ + version 0.1.7.
+ 
+		- Directory structure written in insert option (not active yet).
+
+ + version 0.1.6.
+
+ 		- Resume files uris added.
+
+ + version 0.1.5.
+
+		- File size formatting added.
+		- Debian distro cheking in build option added.
+ 
+ + version 0.1.4.
+
+ 		- Help and version option added.
+		- Uri's file existence in server checking added.
+
+ + version 0.1.3.
+
+		- Grouping uris by server written (best performance).
+		- One ftp connection for each ftp server, nor for each uri.
+ 
+
+ + version 0.1.2.
+
+		- Directory structure written in download option.
+		
+ + version 0.1.1.
+
+		- Added download option.
+ 
+ + version 0.1.0.
+
+ 		- Initial writting.
